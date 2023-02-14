@@ -1,13 +1,15 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
 
-  before_action :ensure_current_user_is_owner, only: [:update, :destroy]
+  before_action :ensure_current_user_is_owner, only: [:destroy, :update, :edit]
 
-  def ensure_current_user_is_owner
-    if current_user != @comment.author
-      redirect_back(fallback_location: root_url, alert: "You're not authorized for that.")
-    end
-  end
+  #  def ensure_current_user_ownscomment
+  #    @photo = Photo.find(params.fetch(:comment).fetch(:photo_id))
+  #
+  #    if @photo.owner.private? || @photo.owner != current_user || !current_user.leaders.include?(@photo.owner)
+  #      redirect_back(fallback_location: root_url, alert: "You're not authorized for that.")
+  #    end
+  #  end
 
   # GET /comments or /comments.json
   def index
@@ -70,6 +72,12 @@ class CommentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_comment
     @comment = Comment.find(params[:id])
+  end
+
+  def ensure_current_user_is_owner
+    if current_user != @comment.author
+      redirect_back fallback_location: root_url, alert: "You're not authorized for that."
+    end
   end
 
   # Only allow a list of trusted parameters through.
