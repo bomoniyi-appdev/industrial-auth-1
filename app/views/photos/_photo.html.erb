@@ -27,7 +27,7 @@
     <p class="card-text"><%= photo.caption %></p>
   </div>
 
-  <ul class="list-group list-group-flush">
+  <ul id="<%= dom_id(photo) %>_photo_comments" class="list-group list-group-flush">
     <% photo.comments.each do |comment| %>
       <%= render "comments/comment", comment: comment %>
     <% end %>
