@@ -10,6 +10,26 @@
 
 <% end %>
 
+<div class="row mb-4">
+  <div class="col-md-6 offset-md-3">
+    <h1 class="display-4">
+
+      Subscribe to One of our Delivery Plans
+
+    </h1>
+
+    <p class="lead text-muted">posts liked by people you follow</p>
+  </div>
+</div>
+
+<% @user.discover.each do |photo| %>
+  <div class="row mb-4">
+    <div class="col-md-6 offset-md-3">
+      <%= render "photos/photo", photo: photo %>
+    </div>
+  </div>
+<% end %>
+
 <div class="vc_row-full-width vc_clearfix"></div>
 <div data-vc-full-width="true" data-vc-full-width-init="false" class="vc_row wpb_row box-wellcome3 vc_custom_1559235661989 vc_row-has-fill">
   <div class="wpb_column column_container col-sm-12">
